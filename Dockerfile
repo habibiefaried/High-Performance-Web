@@ -190,7 +190,7 @@ RUN apk add --update \
 
 
 ##PECL
-RUN apk add --no-cache bash build-base wget curl m4 autoconf libtool imagemagick imagemagick-dev zlib zlib-dev libcurl curl-dev libevent libevent-dev libidn libidn-dev
+RUN apk add --no-cache bash build-base wget curl m4 autoconf libtool imagemagick imagemagick-dev zlib zlib-dev libcurl curl-dev libevent libevent-dev libidn libmemcached libmemcached-dev libidn-dev
 RUN sed -i "$ s|\-n||g" /usr/bin/pecl
 RUN echo "extension=iconv.so" >> /etc/php5/php.ini
 RUN printf "\n" | pecl install raphf-1.1.2 propro-1.0.2 
@@ -198,6 +198,7 @@ RUN echo "extension=raphf.so" >> /etc/php5/php.ini
 RUN echo "extension=propro.so" >> /etc/php5/php.ini
 RUN printf "\n" | pecl install pecl_http-2.5.6
 RUN echo "extension=http.so" >> /etc/php5/php.ini
+RUN printf "\n" | pecl install redis
 
 COPY config/conf.d /etc/nginx/conf.d
 COPY config/nginx.conf /etc/nginx/nginx.conf
@@ -217,6 +218,6 @@ RUN echo 'PS1="\[\033[35m\]\t\[\033[m\]-\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:
 WORKDIR /tmp
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.6.6/phpMyAdmin-4.6.6-all-languages.zip && unzip phpMyAdmin-4.6.6-all-languages.zip
 RUN mv phpMyAdmin-4.6.6-all-languages /usr/share/nginx/html/$PHPMYADMIN_DIR
-
+RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && unzip ngrok-stable-linux-amd64.zip
 WORKDIR /usr/share/nginx/html
 CMD ["/init.sh"]
