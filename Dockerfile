@@ -2,6 +2,10 @@ FROM alpine:3.4
 
 MAINTAINER habibiefaried@gmail.com
 
+#Default MySQL password, just change this
+ENV MYSQL_ROOT_PASSWORD=admin2017!
+ENV PHPMYADMIN_DIR=secretmysql
+
 ENV NGINX_VERSION=1.11.2 \
      PAGESPEED_VERSION=1.11.33.4 \
      LIBPNG_VERSION=1.2.56 \
@@ -138,6 +142,7 @@ RUN apk add --update \
 		php5-pdo \
 		php5-zip \
 		php5-mysql \
+        php5-mysqli \
 		php5-sqlite3 \
 		php5-apcu \
 		php5-intl \
@@ -183,17 +188,35 @@ RUN apk add --update \
 		php5-opcache \
 		php5-fpm
 
+
+##PECL
+RUN apk add --no-cache bash build-base wget curl m4 autoconf libtool imagemagick imagemagick-dev zlib zlib-dev libcurl curl-dev libevent libevent-dev libidn libidn-dev
+RUN sed -i "$ s|\-n||g" /usr/bin/pecl
+RUN echo "extension=iconv.so" >> /etc/php5/php.ini
+RUN printf "\n" | pecl install raphf-1.1.2 propro-1.0.2 
+RUN echo "extension=raphf.so" >> /etc/php5/php.ini
+RUN echo "extension=propro.so" >> /etc/php5/php.ini
+RUN printf "\n" | pecl install pecl_http-2.5.6
+RUN echo "extension=http.so" >> /etc/php5/php.ini
+
 COPY config/conf.d /etc/nginx/conf.d
 COPY config/nginx.conf /etc/nginx/nginx.conf
 COPY html /usr/share/nginx/html
 COPY init.sh /init.sh
 RUN chmod +x /init.sh
-VOLUME ["/var/cache/ngx_pagespeed"]
+VOLUME ["/var/cache/ngx_pagespeed","/app"]
+COPY my.cnf /etc/mysql/my.cnf
+
 COPY php-fpm.conf /etc/php5/php-fpm.conf
+COPY php.ini /etc/php5/php.ini
 RUN chmod -R 777 /var/log/
 
 RUN echo "export TERM=xterm" > /root/.bashrc
 RUN echo 'PS1="\[\033[35m\]\t\[\033[m\]-\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "' >> /root/.bashrc
 
-EXPOSE 80 443
+WORKDIR /tmp
+RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.6.6/phpMyAdmin-4.6.6-all-languages.zip && unzip phpMyAdmin-4.6.6-all-languages.zip
+RUN mv phpMyAdmin-4.6.6-all-languages /usr/share/nginx/html/$PHPMYADMIN_DIR
+
+WORKDIR /usr/share/nginx/html
 CMD ["/init.sh"]
