@@ -22,6 +22,8 @@ Also I'm using Google PageSpeed and multiple php-fpm pooling. Please see the con
 This image was designed to use NGROK (https://ngrok.com/) to expose your chosen local port. 
 I've been using it for while and found it useful!
 
+Besides, It's very easy to EXPOSE port isn't it? ;)
+
 ## This Dockerfile is not well documented and written ##
 Please fork and pull requests ;). I'll write your name on credits!
 
