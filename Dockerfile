@@ -2,9 +2,10 @@ FROM alpine:3.4
 
 MAINTAINER habibiefaried@gmail.com
 
-#Default MySQL password, just change this
+#Default Config, just change this
 ENV MYSQL_ROOT_PASSWORD=admin2017!
 ENV PHPMYADMIN_DIR=secretmysql
+ENV PHPREDISADMIN_DIR=secretredis
 
 ENV NGINX_VERSION=1.11.2 \
      PAGESPEED_VERSION=1.11.33.4 \
@@ -216,8 +217,10 @@ RUN echo "export TERM=xterm" > /root/.bashrc
 RUN echo 'PS1="\[\033[35m\]\t\[\033[m\]-\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "' >> /root/.bashrc
 
 WORKDIR /tmp
+RUN apk add --update redis
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.6.6/phpMyAdmin-4.6.6-all-languages.zip && unzip phpMyAdmin-4.6.6-all-languages.zip
 RUN mv phpMyAdmin-4.6.6-all-languages /usr/share/nginx/html/$PHPMYADMIN_DIR
-RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && unzip ngrok-stable-linux-amd64.zip
-WORKDIR /usr/share/nginx/html
+RUN git clone https://github.com/ErikDubbelboer/phpRedisAdmin.git && cd phpRedisAdmin && git submodule init && git submodule update
+RUN mv phpRedisAdmin /usr/share/nginx/html/
+WORKDIR /root
 CMD ["/init.sh"]

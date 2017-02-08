@@ -1,5 +1,6 @@
 #!/bin/sh
 php-fpm >> /var/log/php-fpm-console.log 2>> /var/log/php-fpm-console.log &  
+redis-server &
 nginx -g "daemon off;" &
 
 if [ -d /app/mysql ]; then
