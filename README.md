@@ -6,13 +6,13 @@ Feel free to use and hack this :)
 Because I want to share my webserver configuration, that had already proven with thousand of concurrent connections (in my own real case).
 
 # Features
-0) Alpine OS (very light image/os)
-1) Nginx 1.11.2
-2) Google PageSpeed 1.11.33.4-0 (Thanks @lagun4ik !)
-3) PHP-FPM 5.6 with PECL (with many extensions)
-4) MySQL
-5) PHPMyAdmin and phpinfo (basic needs)
-6) Redis Caching
+0. Alpine OS (very light image/os)
+1. Nginx 1.11.2
+2. Google PageSpeed 1.11.33.4-0 (Thanks @lagun4ik !)
+3. PHP-FPM 5.6 with PECL (with many extensions)
+4. MySQL
+5. PHPMyAdmin and phpinfo (basic needs)
+6. Redis Caching
 
 # Why this image so light and fast?
 Thanks to (alpinelinux.org) team who builds this mini and powerful image.
