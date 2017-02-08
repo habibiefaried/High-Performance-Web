@@ -1,5 +1,32 @@
-# habibiefaried.c
-Building my website with docker alpine image, pagespeed, php-fpm, mysql, redis. Feel free to use it too :)
+# Description
+Building full stack webserver with docker alpine image, pagespeed, php-fpm, mysql, redis. 
+Feel free to use and hack this :)
+
+# Why you build this?
+Because I want to share my webserver configuration, that had already proven with thousand of concurrent connections (in my own real case).
+
+# Features
+0) Alpine OS (very light image/os)
+1) Nginx 1.11.2
+2) Google PageSpeed 1.11.33.4-0 (Thanks @lagun4ik !)
+3) PHP-FPM 5.6 with PECL (with many extensions)
+4) MySQL
+5) PHPMyAdmin and phpinfo (basic needs)
+6) Redis Caching
+
+# Why this image so light and fast?
+Thanks to (alpinelinux.org) team who builds this mini and powerful image.
+Also I'm using Google PageSpeed and multiple php-fpm pooling. Please see the configuration ;)
+
+# Where's EXPOSE command?
+This image was designed to use NGROK (https://ngrok.com/) to expose your chosen local port. 
+I've been using it for while and found it useful!
+
+# This DockerFile is not well documented and written
+Please fork and pull requests ;). I'll write your name on credits!
 
 # Reference
 https://github.com/lagun4ik/docker-nginx-pagespeed
+
+# Credits
+1. Me
