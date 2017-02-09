@@ -14,6 +14,9 @@ Because I want to share my webserver configuration, that had already proven with
 5. PHPMyAdmin and phpinfo (basic needs)
 6. Redis Caching
 
+## How to run ##
+Just ./build-docker.sh ;)
+
 ## Why this image so light and fast? ##
 Thanks to (alpinelinux.org) team who builds this mini and powerful image.
 Also I'm using Google PageSpeed and multiple php-fpm pooling. Please see the configuration ;)
@@ -25,10 +28,18 @@ I've been using it for while and found it useful!
 Besides, It's very easy to EXPOSE port isn't it? ;)
 
 ## This Dockerfile is not well documented and written ##
-Please fork and pull requests ;). I'll write your name on credits!
+Please fork and pull request ;). I'll write your name on credits!
+
+## This Dockerfile needs to be improved 
+Again, please fork and pull request
 
 ## Reference ##
-https://github.com/lagun4ik/docker-nginx-pagespeed
++ https://github.com/lagun4ik/docker-nginx-pagespeed
++ https://github.com/vozlt/nginx-module-vts
++ and so much other external parties out there!
+
+## Screenshots ##
+
 
 ## Credits ##
 1. Me
