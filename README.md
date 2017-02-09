@@ -12,14 +12,14 @@ Because I want to share my webserver configuration, that had already proven with
 3. PHP-FPM 5.6 with PECL (with many extensions)
 4. MySQL
 5. PHPMyAdmin and phpinfo (basic needs)
-6. Redis Caching
+6. Redis and PHPRedisAdmin
 
 ## How to run ##
 Just ./build-docker.sh ;)
 
 ## Why this image so light and fast? ##
 Thanks to (alpinelinux.org) team who builds this mini and powerful image.
-Also I'm using Google PageSpeed and multiple php-fpm pooling. Please see the configuration ;)
+Also I'm using Google PageSpeed and multiple **php-fpm pooling**. Please see the configuration ;)
 
 ## Where's EXPOSE command? ##
 This image was designed to use NGROK (https://ngrok.com/) to expose your chosen local port. 
@@ -36,7 +36,7 @@ Again, please fork and pull request
 ## Reference ##
 + https://github.com/lagun4ik/docker-nginx-pagespeed
 + https://github.com/vozlt/nginx-module-vts
-+ and so much other external parties out there!
++ and so much other external parties out there. Thanks!
 
 ## Screenshots ##
 ![picture alt](https://raw.githubusercontent.com/habibiefaried/habibiefaried.com/master/screenshots/H0.png "Web Admin Console")
