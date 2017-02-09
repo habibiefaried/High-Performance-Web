@@ -191,7 +191,7 @@ RUN apk add --update \
 
 
 ##PECL
-RUN apk add --no-cache bash build-base wget curl m4 autoconf libtool imagemagick imagemagick-dev zlib zlib-dev libcurl curl-dev libevent libevent-dev libidn libmemcached libmemcached-dev libidn-dev
+RUN apk add --no-cache bash build-base wget curl m4 autoconf libtool imagemagick imagemagick-dev zlib zlib-dev libcurl curl-dev libevent libevent-dev libidn libmemcached libmemcached-dev libidn-dev && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN sed -i "$ s|\-n||g" /usr/bin/pecl
 RUN echo "extension=iconv.so" >> /etc/php5/php.ini
 RUN printf "\n" | pecl install raphf-1.1.2 propro-1.0.2 
@@ -223,5 +223,6 @@ RUN mv phpMyAdmin-4.6.6-all-languages /usr/share/nginx/html/$PHPMYADMIN_DIR
 RUN git clone https://github.com/ErikDubbelboer/phpRedisAdmin.git && cd phpRedisAdmin && git submodule init && git submodule update && cd ..
 RUN mv phpRedisAdmin /usr/share/nginx/html/$PHPREDISADMIN_DIR
 
+RUN cd /usr/share/nginx/html/$PHPREDISADMIN_DIR && composer install
 WORKDIR /root
 CMD ["/init.sh"]
