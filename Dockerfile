@@ -220,7 +220,8 @@ WORKDIR /tmp
 RUN apk add --update redis
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.6.6/phpMyAdmin-4.6.6-all-languages.zip && unzip phpMyAdmin-4.6.6-all-languages.zip
 RUN mv phpMyAdmin-4.6.6-all-languages /usr/share/nginx/html/$PHPMYADMIN_DIR
-RUN git clone https://github.com/ErikDubbelboer/phpRedisAdmin.git && cd phpRedisAdmin && git submodule init && git submodule update
-RUN mv phpRedisAdmin /usr/share/nginx/html/
+RUN git clone https://github.com/ErikDubbelboer/phpRedisAdmin.git && cd phpRedisAdmin && git submodule init && git submodule update && cd ..
+RUN mv phpRedisAdmin /usr/share/nginx/html/$PHPREDISADMIN_DIR
+
 WORKDIR /root
 CMD ["/init.sh"]
