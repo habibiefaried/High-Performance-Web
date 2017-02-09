@@ -39,10 +39,10 @@ Again, please fork and pull request
 + and so much other external parties out there!
 
 ## Screenshots ##
-![alt tag](https://raw.githubusercontent.com/habibiefaried/habibiefaried.com/master/screenshots/H0.png)
-![alt tag](https://raw.githubusercontent.com/habibiefaried/habibiefaried.com/master/screenshots/H1.png)
-![alt tag](https://raw.githubusercontent.com/habibiefaried/habibiefaried.com/master/screenshots/H2.png)
-![alt tag](https://raw.githubusercontent.com/habibiefaried/habibiefaried.com/master/screenshots/H3.png)
+![picture alt](https://raw.githubusercontent.com/habibiefaried/habibiefaried.com/master/screenshots/H0.png "Web Admin Console")
+![picture alt](https://raw.githubusercontent.com/habibiefaried/habibiefaried.com/master/screenshots/H1.png "Upstream Status")
+![picture alt](https://raw.githubusercontent.com/habibiefaried/habibiefaried.com/master/screenshots/H2.png "PHPMyAdmin page")
+![picture alt](https://raw.githubusercontent.com/habibiefaried/habibiefaried.com/master/screenshots/H3.png "PHPRedisAdmin page")
 
 ## Credits ##
 1. Me
