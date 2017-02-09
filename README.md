@@ -13,6 +13,7 @@ Because I want to share my webserver configuration, that had already proven with
 4. MySQL
 5. PHPMyAdmin and phpinfo (basic needs)
 6. Redis and PHPRedisAdmin
+7. Composer
 
 ## How to run ##
 Just ./build-docker.sh ;)
