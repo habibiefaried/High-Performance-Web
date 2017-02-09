@@ -46,3 +46,6 @@ Again, please fork and pull request
 
 ## Credits ##
 1. Me
+
+# Beware #
+You have to put your own security properly. For example, /adminconsole and other paths are still hardcoded. Just don't forget to change that!
