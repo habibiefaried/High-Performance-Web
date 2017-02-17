@@ -1,3 +1,3 @@
-docker stop habibiefaried && docker rm habibiefaried
-docker build -t habibiefaried-image .
-docker run --name habibiefaried -h habibiefaried --restart=always -d habibiefaried-image
+docker stop highperformanceweb && docker rm highperformanceweb
+docker build -t highperformanceweb-image .
+docker run --name highperformanceweb -h highperformanceweb --restart=always -d highperformanceweb-image
