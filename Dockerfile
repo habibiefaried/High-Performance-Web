@@ -33,6 +33,8 @@ RUN adduser -D websrv && adduser -D phpfpm
 
 RUN git clone https://github.com/nbs-system/naxsi.git "/root/nginx-naxsi"
 
+COPY src/nginx/src/http/ngx_http_header_filter_module.c /root/ngx_http_header_filter_module.c
+COPY src/nginx/src/core/nginx.h /root/nginx.h
 
 RUN set -x && \
     apk --no-cache add -t .build-deps \
@@ -85,6 +87,10 @@ RUN set -x && \
     cd /tmp && \
     curl -L http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz | tar -zx && \
     cd /tmp/nginx-${NGINX_VERSION} && \
+    rm /tmp/nginx-${NGINX_VERSION}/src/http/ngx_http_header_filter_module.c && \
+    rm /tmp/nginx-${NGINX_VERSION}/src/core/nginx.h && \
+    cp /root/ngx_http_header_filter_module.c /tmp/nginx-${NGINX_VERSION}/src/http/ngx_http_header_filter_module.c && \
+    cp /root/nginx.h /tmp/nginx-${NGINX_VERSION}/src/core/nginx.h && \
     LD_LIBRARY_PATH=/tmp/modpagespeed-${PAGESPEED_VERSION}/usr/lib ./configure \
         --sbin-path=/usr/sbin \
         --modules-path=/usr/lib/nginx \
