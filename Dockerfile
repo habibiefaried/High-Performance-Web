@@ -31,6 +31,11 @@ RUN apk upgrade --no-cache --update && \
 RUN cd /root && git clone https://github.com/vozlt/nginx-module-vts.git && cd /
 RUN adduser -D websrv && adduser -D phpfpm
 
+RUN git clone https://github.com/nbs-system/naxsi.git "/root/nginx-naxsi"
+
+COPY src/nginx/src/http/ngx_http_header_filter_module.c /root/ngx_http_header_filter_module.c
+COPY src/nginx/src/core/nginx.h /root/nginx.h
+
 RUN set -x && \
     apk --no-cache add -t .build-deps \
         apache2-dev \
@@ -82,6 +87,10 @@ RUN set -x && \
     cd /tmp && \
     curl -L http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz | tar -zx && \
     cd /tmp/nginx-${NGINX_VERSION} && \
+    rm /tmp/nginx-${NGINX_VERSION}/src/http/ngx_http_header_filter_module.c && \
+    rm /tmp/nginx-${NGINX_VERSION}/src/core/nginx.h && \
+    cp /root/ngx_http_header_filter_module.c /tmp/nginx-${NGINX_VERSION}/src/http/ngx_http_header_filter_module.c && \
+    cp /root/nginx.h /tmp/nginx-${NGINX_VERSION}/src/core/nginx.h && \
     LD_LIBRARY_PATH=/tmp/modpagespeed-${PAGESPEED_VERSION}/usr/lib ./configure \
         --sbin-path=/usr/sbin \
         --modules-path=/usr/lib/nginx \
@@ -115,6 +124,7 @@ RUN set -x && \
         --pid-path=/var/run/nginx.pid \
         --add-module=/tmp/ngx_pagespeed-${PAGESPEED_VERSION}-beta \
         --add-module=/root/nginx-module-vts \
+        --add-module="/root/nginx-naxsi/naxsi_src" \
         --with-cc-opt="-fPIC -I /usr/include/apr-1" \
         --with-ld-opt="-luuid -lapr-1 -laprutil-1 -licudata -licuuc -L/tmp/modpagespeed-${PAGESPEED_VERSION}/usr/lib -lpng12 -lturbojpeg -ljpeg" && \
     make -j${MAKE_J} install --silent && \
@@ -204,6 +214,7 @@ RUN printf "\n" | pecl install redis
 COPY config/conf.d /etc/nginx/conf.d
 COPY config/nginx.conf /etc/nginx/nginx.conf
 COPY html /usr/share/nginx/html
+COPY config/naxsi /etc/nginx/naxsi
 COPY init.sh /init.sh
 RUN chmod +x /init.sh
 VOLUME ["/var/cache/ngx_pagespeed","/app"]
